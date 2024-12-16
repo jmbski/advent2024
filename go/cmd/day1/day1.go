@@ -58,12 +58,12 @@ var LocationCheck = &cobra.Command{
 		}
 
 		if puzzle == 1 {
-			if err := SolvePuzzleOne(cmd); err != nil {
+			if err := SolvePuzzleOne(); err != nil {
 				fmt.Println(err)
 			}
 		} else {
 
-			if err := SolvePuzzleTwo(cmd); err != nil {
+			if err := SolvePuzzleTwo(); err != nil {
 				fmt.Println(err)
 			}
 		}
@@ -71,15 +71,13 @@ var LocationCheck = &cobra.Command{
 }
 
 func init() {
-	LocationCheck.Flags().IntP("day-num", "d", 1, "The day number")
+	cmn.InitDailyCmd(LocationCheck, 1)
 }
 
 // SolvePuzzleOne solves the first puzzle
-func SolvePuzzleOne(cmd *cobra.Command) error {
-	handler, err := cmn.NewHandler(cmd)
-	if err != nil {
-		return err
-	}
+func SolvePuzzleOne() error {
+	handler := cmn.NewHandler()
+
 	defer handler.FileStream.Close()
 
 	leftNums, rightNums, err := ParseP1Data(handler)
@@ -132,11 +130,8 @@ func ParseP1Data(handler *cmn.AdventHandler) (leftNums, rightNums []int, err err
 }
 
 // SolvePuzzleTwo solves the second puzzle
-func SolvePuzzleTwo(cmd *cobra.Command) error {
-	handler, err := cmn.NewHandler(cmd)
-	if err != nil {
-		return err
-	}
+func SolvePuzzleTwo() error {
+	handler := cmn.NewHandler()
 	defer handler.FileStream.Close()
 
 	nums, numCounts, err := ParseP2Data(handler)

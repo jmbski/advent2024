@@ -23,6 +23,30 @@ package cmd
 
 import (
 	"advent/cmd/day1"
+	"advent/cmd/day10"
+	"advent/cmd/day11"
+	"advent/cmd/day12"
+	"advent/cmd/day13"
+	"advent/cmd/day14"
+	"advent/cmd/day15"
+	"advent/cmd/day16"
+	"advent/cmd/day17"
+	"advent/cmd/day18"
+	"advent/cmd/day19"
+	"advent/cmd/day2"
+	"advent/cmd/day20"
+	"advent/cmd/day21"
+	"advent/cmd/day22"
+	"advent/cmd/day23"
+	"advent/cmd/day24"
+	"advent/cmd/day25"
+	"advent/cmd/day3"
+	"advent/cmd/day4"
+	"advent/cmd/day5"
+	"advent/cmd/day6"
+	"advent/cmd/day7"
+	"advent/cmd/day8"
+	"advent/cmd/day9"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -64,5 +88,31 @@ func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.PersistentFlags().IntP("puzzle-num", "p", 1, "The puzzle number to run")
 	rootCmd.PersistentFlags().BoolP("sample", "s", false, "Run the sample data")
+	rootCmd.PersistentFlags().BoolP("debug", "D", false, "Enable debug output")
 	rootCmd.AddCommand(day1.LocationCheck)
+	rootCmd.AddCommand(day2.SafeReports)
+	rootCmd.AddCommand(day3.MullItCmd)
+	rootCmd.AddCommand(day4.WordSearch)
+	rootCmd.AddCommand(day5.PrintItCmd)
+	rootCmd.AddCommand(day6.Day6Cmd)
+	rootCmd.AddCommand(day7.Day7Cmd)
+	rootCmd.AddCommand(day8.Day8Cmd)
+	rootCmd.AddCommand(day9.Day9Cmd)
+	rootCmd.AddCommand(day10.Day10Cmd)
+	rootCmd.AddCommand(day11.Day11Cmd)
+	rootCmd.AddCommand(day12.Day12Cmd)
+	rootCmd.AddCommand(day13.Day13Cmd)
+	rootCmd.AddCommand(day14.Day14Cmd)
+	rootCmd.AddCommand(day15.Day15Cmd)
+	rootCmd.AddCommand(day16.Day16Cmd)
+	rootCmd.AddCommand(day17.Day17Cmd)
+	rootCmd.AddCommand(day18.Day18Cmd)
+	rootCmd.AddCommand(day19.Day19Cmd)
+	rootCmd.AddCommand(day20.Day20Cmd)
+	rootCmd.AddCommand(day21.Day21Cmd)
+	rootCmd.AddCommand(day22.Day22Cmd)
+	rootCmd.AddCommand(day23.Day23Cmd)
+	rootCmd.AddCommand(day24.Day24Cmd)
+	rootCmd.AddCommand(day25.Day25Cmd)
+
 }

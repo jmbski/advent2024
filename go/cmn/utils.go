@@ -32,26 +32,74 @@ package cmn
 
 import (
 	"bufio"
+	"fmt"
 	"os"
-	"path/filepath"
+	"strings"
+
+	"github.com/spf13/cobra"
 )
 
 const (
-	DataDir = "/home/joseph/coding_base/advent/go/data"
+	DataDir = "/home/joseph/coding_base/advent2024/go/data"
 )
 
-func GetPuzzleDataScanner(day, puzzle string, useSample bool) (*os.File, *bufio.Scanner, error) {
-	fileName := "puzzle_" + puzzle + ".txt"
-	if useSample {
-		fileName = "sample_" + puzzle + ".txt"
+var ActiveCmd *cobra.Command
+
+// AbsDistInt Returns the absolute value of the difference between two ints
+func AbsDistInt(a, b int) int {
+	dist := a - b
+	if dist < 0 {
+		dist *= -1
 	}
-	path := filepath.Join(DataDir, "day_"+day, fileName)
-	file, err := os.Open(path)
+	return dist
+}
+
+// InitDailyCmd is a convenience function to add the day flag to a command and set
+// the ActiveCmd variable
+func InitDailyCmd(cmd *cobra.Command, day int) {
+	ActiveCmd = cmd
+	ActiveCmd.Flags().IntP("day-num", "d", day, "Day of the Advent of Code challenge")
+}
+
+// DistInt calculates the distance between two ints and returns both the actual
+// distance and the absolute value of it
+func DistInt(a, b int) (dist, abs int) {
+	dist = a - b
+	abs = dist
+	if abs < 0 {
+		abs *= -1
+	}
+	return
+}
+
+// GetInput is a convenience function for getting terminal input from the user
+func GetInput(prompt string) (input string, err error) {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Println(prompt + "\n")
+
+	input, err = reader.ReadString('\n')
 	if err != nil {
-		return nil, nil, err
+
+		return "", err
 	}
+	return strings.TrimSpace(input), nil
+}
 
-	scanner := bufio.NewScanner(file)
+// HandleErr is a convenience function for simple top level error handling
+func HandleErr(err error) {
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
 
-	return file, scanner, nil
+// RemFromSlice removes an element from a slice at a given index
+func RemFromSlice[T comparable](list []T, idx int) []T {
+	newSlice := []T{}
+	for i, value := range list {
+		if i != idx {
+			newSlice = append(newSlice, value)
+		}
+	}
+	return newSlice
 }
